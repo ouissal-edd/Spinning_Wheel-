@@ -1,7 +1,7 @@
 const tagsEl = document.getElementById('tags');
 const textarea = document.getElementById('textarea');
 textarea.focus();
-
+winner = [];
 textarea.addEventListener('keyup', (e) => {
     // create a tag for all the inputs separated by a comma
     createTags(e.target.value);
@@ -14,6 +14,12 @@ textarea.addEventListener('keyup', (e) => {
             wiin = document.querySelector(".highlight").innerText;
             zone = document.getElementById("affichage_win");
             zone.innerHTML = wiin;
+            // remove winner from texterea
+            // winner.push(wiin);
+            // if (document.getElementById('textarea').value.match(wiin)) {
+            //     textarea.innerHTML = "cc"
+            // }
+            // console.log(winner)
 
         }, 6000)
 
@@ -137,7 +143,7 @@ async function read_candidat() {
     <th style="text-align:center">Nom</th>
     <th style="text-align:center">Sujet</th>
     <th style="text-align:center">date</th>
-    <th style="text-align:center">Classement</th>
+    <th>Classement</th>
 </tr>`
 
     for (let i = 0; i < candidat.length; i++) {
@@ -156,7 +162,12 @@ async function read_candidat() {
 }
 read_candidat();
 
+
+
+// getting date
+const Today = document.getElementById("date");
 // Get today
+
 function getDay() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
@@ -164,6 +175,7 @@ function getDay() {
     var yyyy = today.getFullYear();
     today = yyyy + "-" + mm + "-" + dd;
     return today;
+
 }
 
 date = document.getElementById("date");
@@ -173,23 +185,36 @@ date.value = Today_Date;
 
 
 
-// delete data 
+// delete all elemnts in json 
+elemnts = [];
+async function remove() {
+
+    const res = await fetch('http://localhost:8000/users')
+    const data = await res.json()
+    console.log(data.length)
+    for (let i = 0; i < data.length; i++) {
+        elemnts.push(data[i].id)
+
+    }
+    console.log(elemnts)
+    elemnts.map(getId);
+
+}
+
+res = document.querySelector("#reset");
+res.addEventListener('click', e => {
+    e.preventDefault();
+    remove();
+})
+
+function getId(item) {
+    fetch('http://localhost:8000/users/' + item, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => res.json())
+        .then(data => console.log(data))
 
 
-
-// res = document.querySelector("#reset");
-// id_item = document.querySelector(".id_candidat").value;
-// res.addEventListener('click', e => {
-//     e.preventDefault();
-//     obj = {
-//         id: id_item
-//     }
-//     fetch('http://localhost:8000/users/' + 1, {
-//             method: 'DELETE',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//         }).then(res => res.json())
-//         .then(data => console.log(data))
-
-// })
+}
