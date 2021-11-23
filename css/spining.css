@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(to right, #000000,#3a3937);
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	font-family: 'Muli', sans-serif;
+	margin: 0;
+	padding: 10px;
+	text-align: center;
+
+}
+
+h3 {
+	color: #fff;
+	margin: 10px 0 20px;
+}
+
+.container {
+  margin: auto;
+	width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid #221f23;
+    box-shadow: 10px 5px 5px #211d1d;
+/* padding: 50px  0px; */
+    
+}
+
+textarea {
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 12px 15px 12px 15px ;
+    width: 100%;
+    box-sizing: border-box;
+    border: none ;
+    border: 1px solid #F3E5F5 ;
+    font-size: 10px ;
+    color: #000 ;
+    font-weight: 400
+}
+textarea:focus {
+    border: 1px solid #f3be4e !important;
+    outline-width: 0;
+    font-weight: 400
+}
+h3{
+    font-size: 16px;
+}
+.section1{
+    width: 50%;
+    padding: 40px 30px 10px 30px;
+    margin:auto;
+
+}
+#myForm{
+    width: 50%;
+    background-image: linear-gradient(to right,  #3a3937, #000000);
+    padding: 50px 0px;
+
+
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+input 				{
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:300px;
+    border:none;
+    border-bottom:2px solid #f0932b;
+    margin: auto;
+    background: none;
+    color: #fff;
+    outline: none;
+    margin-bottom: 1%;
+  }
+  .btn,.popup{
+    margin: auto;
+    background-color: #f0932b;
+    border: none;
+    color: white;
+    padding: 11px 16px;
+    width: 60%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 11%;
+    cursor: pointer;
+  }
+  .reset{
+      color: #fff;
+      font-size: 10px;
+  }
+  .imgg{
+      width: 13px;
+  }
+  .imgm{
+    width: 23px;
+    cursor: pointer;
+    transition: all ease 5s;
+  }
+
+.tag {
+	background-color: #f0932b;
+	border-radius: 50px;
+	color: #fff;
+	display: inline-block;
+	font-size: 14px;
+	padding: 10px 20px;
+	margin: 0 5px 10px 0;
+}
+
+.tag.highlight {
+    background-color: #050505;
+    box-shadow: 0px 0px 60px #ffffff;
+}
+
+
+/* Table Candidat */
+
+#myPopup {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background: #fff;
+
+  }
+#myPopup td, #myPopup th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #myPopup tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #myPopup tr:hover {background-color: #ddd;}
+  
+  #myPopup th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #a37b0e;
+    color:#fff
+  }
+  .ttab{
+    width: 80%;
+    margin: auto;
+  }
+  
+

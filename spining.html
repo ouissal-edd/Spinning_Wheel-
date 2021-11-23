@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/spining.css">
+
+
+    <title>Spinning</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="section1">
+            <img id="reset" class="imgm" src="css/refresh (1).png">
+
+            <h3>
+                press enter to start or <img class="imgg" src="css/refresh (1).png"> for reset
+
+            </h3>
+            <textarea id="textarea" placeholder="Entrer le noms des candidats..."></textarea>
+            <div id="tags"></div>
+            <!-- <button class="sj" id="Add_subject">add sujet</button> -->
+        </div>
+
+        <div class="form-popup" id="myForm">
+            <form class="form-container">
+
+                <h3>enter your subject</h3>
+                <h3 id="affichage_win"></h3>
+                <input type="text" id="subj" placeholder="sujet" required>
+
+                <input type="date" id="date">
+                <button type="submit" id="btn_json" class="btn">sauvegarder</button>
+                <!-- <div style="margin-top:2% ;" class="popup" onclick="modals()">Extract list</div> -->
+            </form>
+        </div>
+    </div>
+    <div>
+        <div class="ttab">
+            <table id="myPopup">
+
+
+            </table>
+        </div>
+
+
+
+
+</body>
+<script src="js/spinning.js"></script>
+<script src="js/CSVExport.js"></script>
+
+
+
+
+
+
+</html>
