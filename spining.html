@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/spining.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+
 
 
     <title>Spinning</title>
@@ -16,37 +18,50 @@
 
     <div class="container">
         <div class="section1">
-            <img id="reset" class="imgm" src="css/refresh (1).png">
 
             <h3>
-                press enter to start or <img class="imgg" src="css/refresh (1).png"> for reset
-
+                Candidat
             </h3>
-            <textarea id="textarea" placeholder="Entrer le noms des candidats..."></textarea>
-            <div id="tags"></div>
-            <!-- <button class="sj" id="Add_subject">add sujet</button> -->
+            <div>
+                <div id="tags"></div>
+
+            </div>
         </div>
 
         <div class="form-popup" id="myForm">
             <form class="form-container">
 
-                <h3>enter your subject</h3>
-                <h3 id="affichage_win"></h3>
+                <input type="text" placeholder="name" id="name">
                 <input type="text" id="subj" placeholder="sujet" required>
 
-                <input type="date" id="date">
-                <button type="submit" id="btn_json" class="btn">sauvegarder</button>
-                <!-- <div style="margin-top:2% ;" class="popup" onclick="modals()">Extract list</div> -->
+                <button type="submit" id="btn_json" class="btn" onclick="savedata()">sauvegarder</button>
+                <button style="margin-top:2% ;" class="btn" onclick="Randoom()">random</button>
+                <button style="margin-top:2% ;" class="btn" onclick="downloadDoc()">Download PDF</button>
+
             </form>
         </div>
     </div>
     <div>
+
         <div class="ttab">
+
+
             <table id="myPopup">
 
+                <thead>
+                    <th> Name</th>
+                    <th> Sujet</th>
+                    <th> Date</th>
+                </thead>
+                <tbody id="tbodyy">
+
+                </tbody>
 
             </table>
         </div>
+
+
+    </div>
 
 
 
@@ -54,6 +69,11 @@
 </body>
 <script src="js/spinning.js"></script>
 
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/pdfmake.min.js"></script>
+
+<script type="text/javascript" src="js/html2canvas.min.js"></script>
 
 
 

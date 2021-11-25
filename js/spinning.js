@@ -1,220 +1,131 @@
-const tagsEl = document.getElementById('tags');
-const textarea = document.getElementById('textarea');
-textarea.focus();
-winner = [];
-textarea.addEventListener('keyup', (e) => {
-    // create a tag for all the inputs separated by a comma
-    createTags(e.target.value);
+var data = [];
+var today = new Date();
+var winer = [];
+var getData = [];
+// var LocalData = localStorage.getItem("StoredData");
+// var LocalData2 = JSON.parse(LocalData);
+// getData = LocalData2;
+var id = 0;
 
-    // check if the enter key is pressed
-    if (e.key === 'Enter') {
-        setTimeout(() => {
-            // e.target.value = '';
-            document.getElementById("myForm").style.display = "block";
-            wiin = document.querySelector(".highlight").innerText;
-            zone = document.getElementById("affichage_win");
-            zone.innerHTML = wiin;
-            // remove winner from texterea
-            // winner.push(wiin);
-            // if (document.getElementById('textarea').value.match(wiin)) {
-            //     textarea.innerHTML = "cc"
-            // }
-            // console.log(winner)
-
-        }, 6000)
-
-        randomSelect();
-    }
-});
-
-function createTags(input) {
-    const tags = input.split(',').filter(tag => tag.trim() !== '').map(tag => tag.trim());
-    // clean up the tags first
-    tagsEl.innerHTML = '';
-
-    // map over the tags and add them to the tagsEl container
-    tags.forEach(tag => {
-        const tagEl = document.createElement('span');
-        tagEl.classList.add('tag');
-        tagEl.innerText = tag;
-        tagsEl.appendChild(tagEl);
-
-    })
-}
-
-function randomSelect() {
-    const times = 30;
-
-    const interval = setInterval(() => {
-        const randomTag = pickRandomTag();
-
-        highlightTag(randomTag);
-
-        // remove the highlight after a while
-        setTimeout(() => {
-            unhighlightTag(randomTag);
-        }, 100);
-    }, 100);
-
-    // then pick another tag
-    setTimeout(() => {
-        clearInterval(interval);
-
-        setTimeout(() => {
-            const randomTag = pickRandomTag();
-
-            highlightTag(randomTag)
-        }, 100);
-    }, times * 100);
+createTags();
 
 
+function savedata() {
+    // e.preventDefault();
 
+    var namee = document.getElementById("name").value;
+    var subj = document.getElementById("subj").value;
 
-}
-
-function pickRandomTag() {
-    const tags = document.querySelectorAll('.tag');
-    return tags[Math.floor(Math.random() * tags.length)];
-}
-
-function highlightTag(tag) {
-    tag.classList.add('highlight');
-
-
-}
-
-function unhighlightTag(tag) {
-    tag.classList.remove('highlight');
-
-}
-
-
-
-
-// add elements 
-btn_json = document.getElementById("btn_json");
-btn_json.addEventListener('click', e => {
-    e.preventDefault();
-
-    namee = document.getElementById("affichage_win");
-    subject = document.getElementById("subj");
-    date = document.getElementById("date");
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const data = JSON.stringify({
-        nom: namee.innerText,
-        sujet: subject.value,
-        date: date.value,
+    data.push({
+        id: ++id,
+        nom: namee,
+        sujet: subj
     });
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: data,
-        redirect: 'follow'
-    };
 
-    fetch("http://localhost:8000/users", requestOptions)
-        .then(response => response.json())
-        .catch(error => console.log('error', error));
+    var dataJSON = JSON.stringify(data);
+    localStorage.setItem('StoredData', dataJSON);
+    createTags();
 
+}
 
-})
+function createTags() {
 
-// Animation btn restart
-restart = document.getElementById('reset');
-restart.addEventListener('click', e => {
-    e.preventDefault();
-    var deg = Math.floor(Math.random() * (150 - 200)) + 398;
-    restart.style.transform = "rotate(" + deg + "deg)";
+    var recoverdData = localStorage.getItem('StoredData');
+    var recoverdData2 = JSON.parse(recoverdData);
 
+    var tags = document.getElementById('tags');
+    tags.innerHTML = "";
+    for (var i = 0; i < recoverdData2.length; i++) {
 
-
-})
-
-// read data
-async function read_candidat() {
-
-    const res = await fetch('http://localhost:8000/users')
-    const candidat = await res.json()
-
-    document.getElementById('myPopup').innerHTML += ` <tr>
-    <th style="text-align:center">Nom</th>
-    <th style="text-align:center">Sujet</th>
-    <th style="text-align:center">date</th>
-    <th>Classement</th>
-</tr>`
-
-    for (let i = 0; i < candidat.length; i++) {
-        document.getElementById('myPopup').innerHTML +=
+        tags.innerHTML +=
             ` 
-            <tr>
-            <td> ${candidat[i].nom}</td>
-            <td>${candidat[i].sujet}</td>
-            <td>${candidat[i].date}</td>
-            <td class="id_candidat">${candidat[i].id}</td>
-          </tr>
-       `
-
+            <span class="tag" >${recoverdData2[i].nom}-${recoverdData2[i].sujet} </span>
+                        
+                            `
+        document.getElementById("name").value = "";
+        document.getElementById("subj").value = "";
     }
 
 }
-read_candidat();
+
+// --------------- random ---------------
 
 
 
-// getting date
-const Today = document.getElementById("date");
-// Get today
 
-function getDay() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0");
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    return today;
-
-}
-
-date = document.getElementById("date");
-Today_Date = getDay();
-date.min = Today_Date;
-date.value = Today_Date;
-
-
-
-// delete all elemnts in json 
-elemnts = [];
-async function remove() {
-
-    const res = await fetch('http://localhost:8000/users')
-    const data = await res.json()
-    console.log(data.length)
-    for (let i = 0; i < data.length; i++) {
-        elemnts.push(data[i].id)
+function Randoom() {
+    today.setDate(today.getDate() + 1);
+    if (today.getDay() == 6) {
+        today.setDate(today.getDate() + 2)
 
     }
-    console.log(elemnts)
-    elemnts.map(getId);
+
+    var LocalData = localStorage.getItem("StoredData");
+    getNewData = JSON.parse(LocalData);
+
+    var Num = getNewData.length;
+    if (Num == 0) {
+        console.log("No data")
+    }
+    var rand = Math.floor(Math.random() * Num);
+    winer.push({
+        winer_id: getNewData[rand].id,
+        winer_name: getNewData[rand].nom,
+        winer_sujet: getNewData[rand].sujet,
+        winer_date: today.toLocaleDateString()
+
+    });
+    console.log(getNewData);
+    read_winner(getNewData[rand].id);
+
+
 
 }
 
-res = document.querySelector("#reset");
-res.addEventListener('click', e => {
-    e.preventDefault();
-    remove();
-})
+function read_winner(id) {
+    var table = document.getElementById('tbodyy');
+    table.innerHTML = "";
+    for (let i = 0; i < winer.length; i++) {
 
-function getId(item) {
-    fetch('http://localhost:8000/users/' + item, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(res => res.json())
-        .then(data => console.log(data))
+        table.innerHTML += `<tr style="text-align: center; vertical-align: middle;">
+                            <td >${winer[i].winer_name}</td>
+                            <td>${winer[i].winer_sujet}</td>
+                            <td>${winer[i].winer_date}</td>
+                            <td class="ff">${winer[i].winer_id}</td>
+
+                          </tr>`;
+
+    }
+
+
+    var NewLocal = JSON.stringify(getNewData.filter((element) => element.id !== id))
+    localStorage.setItem('StoredData', NewLocal);
+    createTags();
+
+}
+
+
+
+
+
+
+
+// // export pdf
+function downloadDoc() {
+
+    html2canvas($("#myPopup")[0], {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500
+                }]
+            };
+            pdfMake.createPdf(docDefinition).download("Table.pdf");
+        }
+    })
+
 
 
 }
